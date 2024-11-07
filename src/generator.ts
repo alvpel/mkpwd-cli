@@ -1,27 +1,25 @@
-export function generatePassword(
-    length: number,
-    useLetters: boolean,
-    useNumbers: boolean,
-    useSpecial: boolean,
-): string {
-    if (length <= 0) return "";
-    const letters = "abcdefghijklmnopqrstuvwxyz";
-    const numbers = "0123456789";
-    const special = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+import type { ParsedArgs } from "./config.ts";
+
+const LETTERS = "abcdefghijklmnopqrstuvwxyz";
+const NUMBERS = "0123456789";
+const SPECIAL = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+export function generatePassword(args: ParsedArgs): string {
+    if (args.length <= 0) return "";
 
     let characters = "";
-    if (useLetters) characters += letters + letters.toUpperCase();
-    if (useNumbers) characters += numbers;
-    if (useSpecial) characters += special;
+    if (args.useLetters) characters += LETTERS + LETTERS.toUpperCase();
+    if (args.useNumbers) characters += NUMBERS;
+    if (args.useSpecial) characters += SPECIAL;
 
     // ensure each character type is represented at least once
     const password = [];
-    if (useLetters) password.push(pickRandom(letters + letters.toLocaleUpperCase()));
-    if (useNumbers) password.push(pickRandom(numbers));
-if (useSpecial) password.push(pickRandom(special));
+    if (args.useLetters) password.push(pickRandom(LETTERS + LETTERS.toLocaleUpperCase()));
+    if (args.useNumbers) password.push(pickRandom(NUMBERS));
+    if (args.useSpecial) password.push(pickRandom(SPECIAL));
 
     // fill the rest of the password
-    for (let i = password.length; i < length; i++) {
+    for (let i = password.length; i < args.length; i++) {
         password.push(pickRandom(characters));
     }
 
