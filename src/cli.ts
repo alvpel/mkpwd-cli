@@ -9,9 +9,9 @@ async function main() {
         return;
     }
     try { 
-        const { length, useLetters, useNumbers, useSpecial } = getConfig(Deno.args);
+        const config = getConfig(Deno.args);
         
-        const password = generatePassword(length, useLetters, useNumbers, useSpecial);
+        const password = generatePassword(config);
         await copyToClipboard(password);
 
         console.log("Password copied to clipboard");
