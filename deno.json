@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "run": "deno run --allow-env --allow-ru src/cli.ts"
+  }
+}
