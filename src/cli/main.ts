@@ -1,6 +1,6 @@
-import { copyToClipboard } from "./clipboard.ts";
-import { getConfig } from "./config.ts";
-import { generatePassword } from "./generator.ts";
+import { copyToClipboard } from "../utils/clipboard.ts";
+import { parseConfig } from "../config/parseArgs.ts";
+import { generatePassword } from "../password/generator.ts";
 import { showHelp } from "./help.ts";
 
 async function main() {
@@ -9,7 +9,7 @@ async function main() {
         return;
     }
     try { 
-        const config = getConfig(Deno.args);
+        const config = parseConfig(Deno.args);
         
         const password = generatePassword(config);
         await copyToClipboard(password);
