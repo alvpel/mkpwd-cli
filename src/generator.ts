@@ -4,6 +4,7 @@ export function generatePassword(
     useNumbers: boolean,
     useSpecial: boolean,
 ): string {
+    if (length <= 0) return "";
     const letters = "abcdefghijklmnopqrstuvwxyz";
     const numbers = "0123456789";
     const special = "!@#$%^&*()_+-=[]{}|;:,.<>?";
@@ -17,7 +18,7 @@ export function generatePassword(
     const password = [];
     if (useLetters) password.push(pickRandom(letters + letters.toLocaleUpperCase()));
     if (useNumbers) password.push(pickRandom(numbers));
-    if (useSpecial) password.push(pickRandom(special));
+if (useSpecial) password.push(pickRandom(special));
 
     // fill the rest of the password
     for (let i = password.length; i < length; i++) {
