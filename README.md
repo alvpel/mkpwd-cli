@@ -29,7 +29,13 @@ cd mkpwd-cli
 Use Deno's `compile` command to create an executable:
 
 ```bash
-deno compile --allow-env --allow-run --output mkpwd src/cli.ts
+deno compile --allow-env --allow-run --output mkpwd src/cli/main.ts
+```
+
+Or, with the configured task in `deno.json`:
+
+```bash
+deno task compile
 ```
 
 #### macOS and Linux
@@ -64,7 +70,7 @@ You should now be able to use `mkpwd` as a command from any terminal window on W
 Run the password generator with Deno. Ensure you allow required permissions for clipboard and reading environment variables:
 
 ```bash
-deno run --allow-env --allow-run src/cli.ts [options]
+deno run --allow-env --allow-run src/cli/main.ts [options]
 ```
 
 You can also use a `deno.json` file to set up custom tasks for easier execution:
@@ -72,8 +78,9 @@ You can also use a `deno.json` file to set up custom tasks for easier execution:
 ```json
 {
   "tasks": {
-    "run": "deno run --allow-env --allow-run src/cli.ts",
-    "test": "deno test --allow-read"
+    "run": "deno run --allow-env --allow-run src/cli/main.ts",
+    "test": "deno test --allow-read",
+    "compile": "deno compile --allow-env --allow-run --output mkpwd src/cli/main.ts"
   }
 }
 ```
@@ -128,15 +135,29 @@ The tool automatically copies the generated password to the clipboard if clipboa
 ```plaintext
 mkpwd/
 ├── src/
-│   ├── cli.ts                 # Main CLI entry point
-│   ├── config.ts              # Configuration and argument parsing
-│   ├── generator.ts           # Password generation logic
-│   ├── clipboard.ts           # Clipboard functionality
+│   ├── cli/
+│   │   ├── main.ts              # Main CLI entry point, handles user interactions and errors
+│   │   ├── help.ts              # Displays CLI usage and help information
+│   ├── config/
+│   │   ├── parseArgs.ts         # Argument parsing and configuration setup
+│   │   ├── defaults.ts          # Default configuration values
+│   │   ├── validations.ts       # Validation functions for arguments (e.g., length validation)
+│   ├── password/
+│   │   ├── generator.ts         # Password generation logic
+│   │   ├── charSets.ts          # Character sets for letters, numbers, and special characters
+│   │   └── ensureTypes.ts       # Ensures each character type is represented in the password
+│   ├── utils/
+│   │   ├── clipboard.ts         # Clipboard functionality
+│   │   ├── parseBoolean.ts      # Utility function for parsing boolean arguments
+│   │   └── random.ts            # Random functions (e.g., random selection, shuffle)
 ├── tests/
-│   ├── config.test.ts         # Tests for config.ts
-│   └── generator.test.ts      # Tests for generator.ts
-├── README.md                  # Project documentation
-└── deno.json                  # Deno configuration file with tasks
+│   ├── cli.test.ts              # Tests for CLI behavior and help messages
+│   ├── config.test.ts           # Tests for configuration parsing and argument handling
+│   ├── generator.test.ts        # Tests for password generation logic
+│   ├── parseArgs.test.ts        # Tests for argument parsing functionality
+│   └── validations.test.ts      # Tests for validation functions
+├── README.md                    # Project documentation
+└── deno.json                    # Deno configuration file with tasks
 ```
 
 ### Running Tests
