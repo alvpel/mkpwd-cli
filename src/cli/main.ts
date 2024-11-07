@@ -3,7 +3,7 @@ import { parseConfig } from "../config/parseArgs.ts";
 import { generatePassword } from "../password/generator.ts";
 import { showHelp } from "./help.ts";
 
-export async function main(args: string[] = Deno.args) {
+export async function main(args: string[] = Deno.args, shouldExit = true) {
     if (args.includes("--help")) {
         showHelp();
         return;
@@ -18,10 +18,12 @@ export async function main(args: string[] = Deno.args) {
     } catch (error) {
         if (error instanceof Error) {
             console.error("Error:", error.message);
+            if (!shouldExit) throw error;
         } else {
             console.error("An unknown error occurred");
+            if (!shouldExit) throw new Error("An unknown error occurred");
         }
-        Deno.exit(1);
+        if (shouldExit) Deno.exit(1);
     }
 }
 

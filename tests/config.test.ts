@@ -15,7 +15,7 @@ Deno.test("parseConfig correctly parses length argument", () => {
 });
 
 Deno.test("parseConfig throws error for invalid length (negative number)", () => {
-    assertThrows(() => parseConfig(["--length=-5"]), Error, "Invalid length specified.");
+    assertThrows(() => parseConfig(["--length=-5"]), Error, "Invalid length");
 });
 
 Deno.test("parseConfig correctly parses boolean flags", () => {

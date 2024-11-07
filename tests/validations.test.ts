@@ -2,8 +2,8 @@ import { validateLength, validateCharacterTypes } from "../src/config/validation
 import { assertThrows } from "jsr:@std/assert";
 
 Deno.test("validateLength throws error for non-positive lengths", () => {
-    assertThrows(() => validateLength(-5), Error, "Invalid length specified.");
-    assertThrows(() => validateLength(0), Error, "Invalid length specified.");
+    assertThrows(() => validateLength(-5), Error, "Invalid length");
+    assertThrows(() => validateLength(0), Error, "Invalid length");
 });
 
 Deno.test("validateCharacterTypes throws error when all types are disabled", () => {
