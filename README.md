@@ -24,6 +24,22 @@ git clone <repository-url>
 cd <repository-directory>
 ```
 
+### Compile the CLI
+
+Use Deno's `compile` command to create an executable:
+
+```bash
+deno compile --allow-read --allow-write --allow-run --allow-env --output mkpwd src/cli.ts
+```
+
+Move the binary to a directory in your system's PATH, such as `/usr/local/bin`:
+
+```bash
+sudo mv mkpwd /usr/local/bin/
+```
+
+You can now use `fl` as a command from anywhere in your terminal.
+
 ### Usage
 
 Run the password generator with Deno. Ensure you allow required permissions for clipboard and reading environment variables:
