@@ -29,7 +29,7 @@ cd mkpwd-cli
 Use Deno's `compile` command to create an executable:
 
 ```bash
-deno compile --allow-read --allow-write --allow-run --allow-env --output mkpwd src/cli.ts
+deno compile --allow-env --allow-run --output mkpwd src/cli.ts
 ```
 
 Move the binary to a directory in your system's PATH, such as `/usr/local/bin`:
