@@ -5,11 +5,11 @@ export function generatePassword(
     useSpecial: boolean,
 ): string {
     const letters = "abcdefghijklmnopqrstuvwxyz";
-    const numbers = "01234567890";
+    const numbers = "0123456789";
     const special = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
     let characters = "";
-    if (useLetters) characters += letters + letters.toUpperCase;
+    if (useLetters) characters += letters + letters.toUpperCase();
     if (useNumbers) characters += numbers;
     if (useSpecial) characters += special;
 
