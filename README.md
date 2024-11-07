@@ -1,4 +1,4 @@
-# Password Generator CLI Tool
+# Make Password (mkpwd) CLI Tool
 
 A command-line tool built with Deno 2 that generates random passwords based on user-defined criteria. This tool allows customization of password length and character types (letters, numbers, special characters) and can copy the generated password directly to your clipboard.
 
