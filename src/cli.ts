@@ -1,8 +1,13 @@
 import { copyToClipboard } from "./clipboard.ts";
 import { getConfig } from "./config.ts";
 import { generatePassword } from "./generator.ts";
+import { showHelp } from "./help.ts";
 
 async function main() {
+    if (Deno.args.includes("--help")) {
+        showHelp();
+        return;
+    }
     try { 
         const { length, useLetters, useNumbers, useSpecial } = getConfig(Deno.args);
         
