@@ -20,8 +20,8 @@ A command-line tool built with Deno 2 that generates random passwords based on u
 Clone this repository and navigate to the project directory:
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/alvpel/mkpwd-cli.git
+cd mkpwd-cli
 ```
 
 ### Compile the CLI
@@ -38,7 +38,7 @@ Move the binary to a directory in your system's PATH, such as `/usr/local/bin`:
 sudo mv mkpwd /usr/local/bin/
 ```
 
-You can now use `fl` as a command from anywhere in your terminal.
+You can now use `mkpwd` as a command from anywhere in your terminal.
 
 ### Usage
 
