@@ -32,13 +32,32 @@ Use Deno's `compile` command to create an executable:
 deno compile --allow-env --allow-run --output mkpwd src/cli.ts
 ```
 
-Move the binary to a directory in your system's PATH, such as `/usr/local/bin`:
+#### macOS and Linux
+
+After compiling, move the binary to a directory in your system's `PATH`, such as `/usr/local/bin`:
 
 ```bash
 sudo mv mkpwd /usr/local/bin/
 ```
 
 You can now use `mkpwd` as a command from anywhere in your terminal.
+
+#### Windows
+
+On Windows, move the executable to a directory in your `PATH`, such as `C:\Program Files` or another directory listed in your system's `PATH` environment variable.
+
+1. Move the compiled `mkpwd.exe` to a directory in your `PATH`:
+    ```powershell
+    move mkpwd.exe "C:\Program Files\"
+    ```
+
+2. Alternatively, add the directory containing `mkpwd.exe` to your `PATH`:
+   - Open **System Properties** > **Environment Variables**.
+   - Under **System variables**, find and edit the `Path` variable.
+   - Add the path to the directory containing `mkpwd.exe` (e.g., `C:\path\to\your\executable\directory`).
+   - Click **OK** to save changes.
+
+You should now be able to use `mkpwd` as a command from any terminal window on Windows.
 
 ### Usage
 
