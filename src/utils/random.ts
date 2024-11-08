@@ -1,6 +1,6 @@
-export function pickRandom(characters: string): string {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    return characters[randomIndex];
+export function pickRandom<T>(items: T[] | string): T | string {
+    const randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
 }
 
 export function shuffleArray(array: string[]): string[] {
