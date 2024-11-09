@@ -1,4 +1,4 @@
-import type { PasswordConfig } from "../config/parseArgs.ts";
+import type { PasswordConfig } from "../config/types.ts";
 import { pickRandom } from "../utils/random.ts";
 import { CHAR_SET } from "./charSets/charSet.ts";
 

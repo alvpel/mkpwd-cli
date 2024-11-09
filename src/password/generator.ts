@@ -1,5 +1,5 @@
-import type { PasswordConfig } from "../config/parseArgs.ts";
 import { pickRandom, shuffleArray } from "../utils/random.ts";
+import type { PasswordConfig } from "../config/types.ts";
 import { CHAR_SET } from "./charSets/charSet.ts";
 import { ensureCharacterTypes } from "./ensureTypes.ts";
 
