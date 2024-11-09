@@ -1,5 +1,6 @@
 import { main } from "../src/cli/main.ts";
-import { assertStringIncludes, assertRejects } from "jsr:@std/assert";
+import { assertStringIncludes, assertRejects, assertEquals } from "jsr:@std/assert";
+import { pickRandom } from "../src/utils/random.ts";
 
 async function captureOutput(fn: () => Promise<void> | void): Promise<string> {
     const originalConsoleLog = console.log;
@@ -34,4 +35,9 @@ Deno.test("CLI throws error when invalid length is provided", async () => {
         },
         Error, "Invalid length"
     );
+});
+
+Deno.test("CLI generates passphrase with default options", async () => {
+    const output = await captureOutput(() => main(["--passphrase"], false));
+    assertEquals(output, "Password copied to clipboard"); // Default word count
 });
