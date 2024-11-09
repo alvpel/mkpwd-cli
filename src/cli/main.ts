@@ -1,18 +1,27 @@
 import { copyToClipboard } from "../utils/clipboard.ts";
-import { parseConfig } from "../config/parseArgs.ts";
+import { isPassphraseConfig, parseConfig } from "../config/parseArgs.ts";
 import { generatePassword } from "../password/generator.ts";
 import { showHelp } from "./help.ts";
+import { generatePassphrase } from "../passphrase/generator.ts";
+import type { PassphraseConfig, PasswordConfig } from "../config/types.ts";
 
 export async function main(args: string[] = Deno.args, shouldExit = true) {
     if (args.includes("--help")) {
         showHelp();
         return;
     }
+
     try { 
         const config = parseConfig(args);
-        
-        const password = generatePassword(config);
-        await copyToClipboard(password);
+        let pass = "";
+
+        if (isPassphraseConfig(config)) {
+            pass = await generatePassphrase(config as PassphraseConfig);
+        } else {
+            pass = await generatePassword(config as PasswordConfig);
+        }
+
+        await copyToClipboard(pass);
 
         console.log("Password copied to clipboard");
     } catch (error) {
@@ -27,7 +36,6 @@ export async function main(args: string[] = Deno.args, shouldExit = true) {
     }
 }
 
-// Only call main() if the file is run directly, not imported
 if (import.meta.main) {
     main();
 }
