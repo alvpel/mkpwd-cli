@@ -5,6 +5,7 @@ A command-line tool built with Deno 2 that generates random passwords based on u
 ## Features
 
 - **Customizable Password Length**: Specify the desired length of the password.
+- **Passphrase Generation**: Generate easy-to-remember passphrases using random words, with options to customize word count and separator.
 - **Character Types**: Choose to include letters, numbers, and/or special characters.
 - **Clipboard Support**: Copy the generated password directly to your clipboard (requires system clipboard access).
 - **Default Settings**: If no arguments are provided, the tool generates a 12-character password with letters and numbers.
@@ -80,7 +81,8 @@ You can also use a `deno.json` file to set up custom tasks for easier execution:
   "tasks": {
     "run": "deno run --allow-env --allow-run src/cli/main.ts",
     "test": "deno test --allow-read",
-    "compile": "deno compile --allow-env --allow-run --output mkpwd src/cli/main.ts"
+    "compile": "deno compile --allow-env --allow-run --output mkpwd src/cli/main.ts",
+    "encode": "deno run --allow-read helper/encodeFileToDataUrl.ts ./helper/wordlist.txt"
   }
 }
 ```
@@ -99,6 +101,9 @@ deno task run [options]
 | `--letters=<bool>` | true    | Include letters (both uppercase and lowercase).  |
 | `--numbers=<bool>` | true    | Include numbers.                                 |
 | `--special=<bool>` | false   | Include special characters (e.g., `!@#$%`).      |
+| `--passphrase`     | false       | Generate a passphrase instead of a password.     |
+| `--words <num>`    | 4           | Number of words in passphrase (with `--passphrase`). |
+| `--separator <str>`| "-"         | Separator for words in passphrase.               |
 
 **Boolean options** accept `true` or `false`. Example: `--letters=false`.
 
@@ -124,6 +129,16 @@ deno task run [options]
    deno task run --length=20 --letters=true --numbers=false --special=false
    ```
 
+5. **Generate a passphrase with default settings (4 words, separated by dashes):**
+   ```bash
+   deno task run --passphrase
+   ```
+
+6. **Generate a passphrase with 6 words, separated by underscores:**
+   ```bash
+   deno task run --passphrase --words=6 --separator=_
+   ```
+
 ### Clipboard Support
 
 The tool automatically copies the generated password to the clipboard if clipboard permissions are granted. If your platform supports it, you’ll see a message confirming the password has been copied.
@@ -145,11 +160,17 @@ mkpwd/
 │   ├── password/
 │   │   ├── generator.ts         # Password generation logic
 │   │   ├── charSets.ts          # Character sets for letters, numbers, and special characters
+│   ├── passphrase/
+│   │   ├── generator.ts         # Passphrase generation logic
+│   │   ├── wordlist.txt         # Word list used for passphrase generation
 │   │   └── ensureTypes.ts       # Ensures each character type is represented in the password
 │   ├── utils/
 │   │   ├── clipboard.ts         # Clipboard functionality
 │   │   ├── parseBoolean.ts      # Utility function for parsing boolean arguments
 │   │   └── random.ts            # Random functions (e.g., random selection, shuffle)
+├── helper/
+│   ├── encodeFileToDataUrl.ts   # Word set encoder to data URL 
+│   ├── wordlist.txt             # Word set used for passphrases 
 ├── tests/
 │   ├── cli.test.ts              # Tests for CLI behavior and help messages
 │   ├── config.test.ts           # Tests for configuration parsing and argument handling
@@ -180,9 +201,9 @@ This will execute tests in the `tests/` directory, covering both configuration a
 
 The configuration options are parsed in `config.ts` using `parseArgs`. This handles the command-line flags and applies default values when options are omitted.
 
-### Password Generation Logic
+### Password and Passphrase Generation Logic
 
-The password generation logic is in `generator.ts`, ensuring the correct length and character type combinations based on user-specified flags.
+The password generation logic is in `generator.ts`, ensuring the correct length and character type combinations based on user-specified flags. Passphrase generation logic in `passphrase/generator.ts` handles word selection and customization of the separator and word count.
 
 ## Contributing
 
