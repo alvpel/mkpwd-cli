@@ -1,15 +1,15 @@
 import { pickRandom, shuffleArray } from "../utils/random.ts";
 import type { PasswordConfig } from "../config/types.ts";
-import { CHAR_SET } from "./charSets/charSet.ts";
+import { LETTERS, NUMBERS, SPECIAL } from "./charSet.ts";
 import { ensureCharacterTypes } from "./ensureTypes.ts";
 
 export function generatePassword(config: PasswordConfig): string {
     if (config.length <= 0) return "";
 
     let characters = "";
-    if (config.useLetters) characters += CHAR_SET.letters;
-    if (config.useNumbers) characters += CHAR_SET.numbers;
-    if (config.useSpecial) characters += CHAR_SET.special;
+    if (config.useLetters) characters += LETTERS + LETTERS.toUpperCase();
+    if (config.useNumbers) characters += NUMBERS;
+    if (config.useSpecial) characters += SPECIAL;
 
     const password = ensureCharacterTypes(config)
 
