@@ -2,7 +2,7 @@ import { loadListFromFile } from "../utils/loadList.ts";
 import { pickRandom } from "../utils/random.ts";
 import type { PassphraseConfig } from "../config/types.ts";
 
-const WORD_LIST_PATH = './src/passphrase/wordlist.txt';
+const WORD_LIST_PATH = '../passphrase/wordlist.txt';
 
 export async function generatePassphrase(config: PassphraseConfig): Promise<string> {
     const words = await loadListFromFile(WORD_LIST_PATH);

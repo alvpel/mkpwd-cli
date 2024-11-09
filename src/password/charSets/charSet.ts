@@ -1,9 +1,9 @@
 import { loadListFromFile } from "../../utils/loadList.ts";
 
 const CHARACTER_SET_PATHS = {
-    letters: './src/password/charSets/letters.txt',
-    numbers: './src/password/charSets/numbers.txt',
-    special: './src/password/charSets/special.txt'
+    letters: '../password/charSets/letters.txt',
+    numbers: '../password/charSets/numbers.txt',
+    special: '../password/charSets/special.txt'
 }
 
 export const CHAR_SET = {
