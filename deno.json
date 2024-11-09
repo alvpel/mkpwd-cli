@@ -2,6 +2,6 @@
   "tasks": {
     "run": "deno run --allow-env --allow-run --allow-read src/cli/main.ts",
     "test": "deno test --allow-read --allow-run",
-    "compile": "deno compile --allow-env --allow-run --output mkpwd src/cli/main.ts"
+    "compile": "deno compile --allow-env --allow-run --allow-read --output mkpwd src/cli/main.ts"
   }
 }
