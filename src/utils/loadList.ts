@@ -1,9 +1,10 @@
-import { join, dirname, fromFileUrl } from "jsr:@std/path"
-
-export async function loadListFromFile(filePath: string): Promise<string[]> {
-    const basePath = dirname(fromFileUrl(import.meta.url));
-    const absolutePath = join(basePath, filePath);
-
-    const text = await Deno.readTextFile(absolutePath);
-    return text.split("\n").map(word => word.trim()).filter(Boolean);
+export async function loadListFromFile(pathOrDataUrl: string): Promise<string[]> {
+    if (pathOrDataUrl.startsWith("data:text/plain;base64,")) {
+        const base64Data = pathOrDataUrl.split(",")[1];
+        const decodedText = atob(base64Data);
+        return decodedText.split("\n").map(line => line.trim()).filter(Boolean);
+    } else {
+        const text = await Deno.readTextFile(pathOrDataUrl);
+        return text.split("\n").map(word => word.trim()).filter(Boolean);
+    }
 }
